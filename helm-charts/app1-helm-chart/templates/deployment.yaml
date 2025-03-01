@@ -29,4 +29,8 @@ spec:
           requests:
             cpu: {{ .Values.resources.requests.cpu }}
             memory: {{ .Values.resources.requests.memory }}
+        livenessProbe: {{ .Values.livenessProbe | toYaml | nindent 12 }}
+        readinessProbe: {{ .Values.readinessProbe | toYaml | nindent 12 }}
+      strategy: 
+        {{ .Values.strategy | toYaml | nindent 8 }}
 
