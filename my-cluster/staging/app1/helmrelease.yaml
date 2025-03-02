@@ -12,7 +12,5 @@ spec:
       sourceRef:
         kind: GitRepository
         name: flux-system
-valuesFrom:
-  - kind: GitRepository
-    name: flux-system
-    valuesKey: "helm-charts/app1-helm-chart/values-staging.yaml"
+  valuesFiles:
+    - "helm-charts/app1-helm-chart/values-staging.yaml"
