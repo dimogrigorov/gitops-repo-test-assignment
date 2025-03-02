@@ -14,7 +14,7 @@ spec:
         name: flux-system
         namespace: flux-system
   values:
-    replicaCount: 0
+    replicaCount: 1
 
     image:
       registry: "479701439711.dkr.ecr.us-east-1.amazonaws.com"
