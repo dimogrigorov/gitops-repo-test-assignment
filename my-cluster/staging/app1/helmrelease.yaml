@@ -2,26 +2,16 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: app1
-  namespace: app1-namespace
+  namespace: staging
 spec:
-  interval: 5m
+  interval: 1m
   chart:
     spec:
-      chart: ./helm-charts/app1  # Path inside the GitOps repo
+      chart: app1-helm-chart  # Corrected path
       sourceRef:
         kind: GitRepository
-        name: gitops-repo
-      interval: 5m
-  values:
-    replicaCount: 2
-    image:
-      repository: my-app
-      tag: "latest"
-    resources:
-      limits:
-        cpu: "1"
-        memory: "1Gi"
-      requests:
-        cpu: "500m"
-        memory: "512Mi"
-
+        name: flux-system
+valuesFrom:
+  - kind: GitRepository
+    name: flux-system
+    valuesKey: "helm-charts/app1-helm-chart/values-staging.yaml"

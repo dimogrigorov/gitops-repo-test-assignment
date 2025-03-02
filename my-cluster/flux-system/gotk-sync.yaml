@@ -12,6 +12,9 @@ spec:
   secretRef:
     name: flux-system
   url: ssh://git@github.com/dimogrigorov/gitops-repo-test-assignment
+  ignore: |
+    # Ignore everything except helm-charts
+    !helm-charts/
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization

@@ -28,7 +28,7 @@ aws:
 serviceAccount:
   create: true
   name: "ecr-sa"
-  iamRoleName: "CreateLoadBalancerRole"
+  iamRoleName: "ECRAccessRole"
 
 livenessProbe:
   httpGet:
