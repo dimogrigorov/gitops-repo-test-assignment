@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace | default "default" }}
 spec:
   selector:
-    app: {{ .Release.Name }}
+    app: {{ .Release.Name }}  # This should match the label in Deployment
   ports:
     - protocol: TCP
       port: {{ .Values.service.port }}

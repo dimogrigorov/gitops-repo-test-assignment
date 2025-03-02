@@ -1,3 +1,4 @@
+{{- if .Values.ingress.create }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -17,4 +18,4 @@ spec:
                 name: {{ .Release.Name }}
                 port:
                   number: {{ .Values.service.port }}
-
+{{- end }}

@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-app
+  name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ .Release.Name }}-app
+    app: {{ .Release.Name }}  # This should match the service selector
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-app
+      app: {{ .Release.Name }}  # Match the service selector here
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-app
+        app: {{ .Release.Name }}  # Ensure this matches the service selector
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
-      - name: {{ .Release.Name }}-app
+      - name: {{ .Release.Name }}
         image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
@@ -31,6 +31,6 @@ spec:
             memory: {{ .Values.resources.requests.memory }}
         livenessProbe: {{ .Values.livenessProbe | toYaml | nindent 12 }}
         readinessProbe: {{ .Values.readinessProbe | toYaml | nindent 12 }}
-      strategy: 
+      strategy:
         {{ .Values.strategy | toYaml | nindent 8 }}
 
