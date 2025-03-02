@@ -25,33 +25,3 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: staging
-  namespace: flux-system
-spec:
-  interval: 1m
-  path: ./my-cluster/staging/app1  # Path where helmrelease.yaml is located
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-  targetNamespace: staging
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: production
-  namespace: flux-system
-spec:
-  interval: 1m
-  path: ./my-cluster/production/app1  # Path where helmrelease.yaml is located
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-  targetNamespace: production
-
-
