@@ -12,5 +12,55 @@ spec:
       sourceRef:
         kind: GitRepository
         name: flux-system
-  valuesFiles:
-    - values-staging.yaml
+  values:
+    replicaCount: 2
+
+    image:
+      registry: "479701439711.dkr.ecr.us-east-1.amazonaws.com"
+      repository: "testassignment/my-spring-boot-repo"
+      tag: "latest"
+      pullPolicy: "Always"
+
+    service:
+      type: NodePort
+      port: 8080
+
+    ingress:
+      create: false
+      hostname: myapp.example.com
+
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1024Mi
+      requests:
+        cpu: 500m
+        memory: 512Mi
+
+    aws:
+      accountId: "479701439711"
+
+    serviceAccount:
+      create: true
+      name: "ecr-sa"
+      iamRoleName: "ECRAccessRole"
+
+    livenessProbe:
+      httpGet:
+        path: /actuator/health
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
+
+    readinessProbe:
+      httpGet:
+        path: /actuator/health
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1 
