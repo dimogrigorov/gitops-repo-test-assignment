@@ -22,3 +22,5 @@ gitops-repo-test-assignment/  # Dedicated GitOps repository for Flux
 │   │   │   ├── service.yaml
 │   │   │   ├── ingress.yaml
 
+# For manual applying of app1 helm run:
+helm install my-app helm-charts/app1-helm-chart -f helm-charts/app1-helm-chart/values-staging.yaml

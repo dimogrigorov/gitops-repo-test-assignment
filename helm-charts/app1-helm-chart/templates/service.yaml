@@ -5,10 +5,28 @@ metadata:
   namespace: {{ .Release.Namespace | default "default" }}
 spec:
   selector:
-    app: {{ .Release.Name }}  # This should match the label in Deployment
+    app: {{ .Release.Name }}
   ports:
     - protocol: TCP
       port: {{ .Values.service.port }}
       targetPort: 8080
-  type: {{ .Values.service.type }}
+      nodePort: 31000
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-lb
+  namespace: {{ .Release.Namespace | default "default" }}
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    service.beta.kubernetes.io/aws-load-balancer-internal: "false"
+spec:
+  selector:
+    app: {{ .Release.Name }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: 8080
+  type: LoadBalancer
 
