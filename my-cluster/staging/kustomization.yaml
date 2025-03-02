@@ -4,7 +4,7 @@ metadata:
   name: staging
   namespace: flux-system
 spec:
-  interval: 10m
+  interval: 1m
   path: ./staging/app1  # Path where helmrelease.yaml is located
   prune: true
   sourceRef:
