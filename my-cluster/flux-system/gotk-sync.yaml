@@ -33,7 +33,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./staging/app1  # Path where helmrelease.yaml is located
+  path: ./my-cluster/staging/app1  # Path where helmrelease.yaml is located
   prune: true
   sourceRef:
     kind: GitRepository
@@ -47,7 +47,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./production/app1  # Path where helmrelease.yaml is located
+  path: ./my-cluster/production/app1  # Path where helmrelease.yaml is located
   prune: true
   sourceRef:
     kind: GitRepository
