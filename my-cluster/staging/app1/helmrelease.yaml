@@ -8,7 +8,7 @@ spec:
   targetNamespace: staging
   chart:
     spec:
-      chart: app1-helm-chart  # Corrected path
+      chart: ./helm-charts/app1-helm-chart  # Corrected path
       sourceRef:
         kind: GitRepository
         name: flux-system
