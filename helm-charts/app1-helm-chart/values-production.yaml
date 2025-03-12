@@ -11,8 +11,8 @@ service:
   port: 8080
 
 ingress:
-  create: false
-  hostname: myapp.example.com
+  create: true
+  hostname: staging.dimocloud.click
 
 resources:
   limits:
