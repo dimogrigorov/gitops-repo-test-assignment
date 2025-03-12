@@ -26,9 +26,9 @@ aws:
   accountId: "479701439711"
 
 serviceAccount:
-  create: false
+  create: true
   name: "ecr-sa"
-  iamRoleName: "LoadBalancerSAIAMRole"
+  iamRoleName: "CreateLoadBalancerRole"
 
 livenessProbe:
   httpGet:
