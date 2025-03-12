@@ -10,6 +10,8 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}  # Match the service selector here
+  strategy:
+    {{ .Values.strategy | toYaml | nindent 4 }}
   template:
     metadata:
       labels:
@@ -31,6 +33,4 @@ spec:
             memory: {{ .Values.resources.requests.memory }}
         livenessProbe: {{ .Values.livenessProbe | toYaml | nindent 12 }}
         readinessProbe: {{ .Values.readinessProbe | toYaml | nindent 12 }}
-      strategy:
-        {{ .Values.strategy | toYaml | nindent 8 }}
 
