@@ -7,7 +7,7 @@ image:
   pullPolicy: "Always"
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 8080
 
 ingress:
@@ -26,9 +26,9 @@ aws:
   accountId: "479701439711"
 
 serviceAccount:
-  create: true
+  create: false
   name: "ecr-sa"
-  iamRoleName: "ECRAccessRole"
+  iamRoleName: "LoadBalancerSAIAMRole"
 
 livenessProbe:
   httpGet:

@@ -122,4 +122,50 @@ spec:
 
 The retry policy allows failed deployments to retry a few times before rolling back.
 
+# Setting Up Route 53 Record for `myapp.example.com`
+
+We need to create a **CNAME** or **A record** in Route 53 that points to the **ALB's DNS name**.
+
+
+
+
+----------------------------------------------------------------------------------
+
+
+## Steps to Set Up Route 53 Record for `myapp.example.com`
+
+### 1. Find the ALB's DNS Name
+Run the following command to get the ALB details:
+```sh
+kubectl get ingress my-app -n default
+```
+You should see an output like this:
+```sh
+NAME     CLASS    HOSTS                ADDRESS                                              PORTS   AGE
+my-app   alb      myapp.example.com    my-app-alb-123456789.us-east-1.elb.amazonaws.com    80      10m
+```
+The `ADDRESS` column contains the **ALB's DNS name** (e.g., `my-app-alb-123456789.us-east-1.elb.amazonaws.com`).
+
+### 2. Create a Record in Route 53
+
+1. Open **AWS Route 53**.
+2. Go to the **hosted zone** for `example.com`.
+3. Click **Create Record** and choose the following options:
+
+   - **Record Name:** `myapp` (so the full name becomes `myapp.example.com`)
+   - **Record Type:**
+     - **CNAME** (if using a non-alias record):
+       - **Value:** `my-app-alb-123456789.us-east-1.elb.amazonaws.com`
+     - **Alias (Recommended):**
+       - Select **"Alias to Application Load Balancer"**
+       - Choose the **ALB's DNS name** from the dropdown.
+
+4. Save the record and wait for it to propagate.
+
+### 3. Verification
+Once the Route 53 record is created and propagated, you can test access by running:
+```sh
+curl -v http://myapp.example.com
+```
+
 
