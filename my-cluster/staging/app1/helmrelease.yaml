@@ -13,6 +13,13 @@ spec:
         kind: GitRepository
         name: flux-system
         namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+      strategy: rollback
   values:
     replicaCount: 1
 
