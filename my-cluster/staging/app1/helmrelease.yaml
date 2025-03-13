@@ -19,7 +19,7 @@ spec:
     image:
       registry: "479701439711.dkr.ecr.us-east-1.amazonaws.com"
       repository: "testassignment/my-spring-boot-repo"
-      tag: "latest"
+      tag: "0.0.3"
       pullPolicy: "Always"
 
     service:
